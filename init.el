@@ -3,6 +3,14 @@
 (setq package-archives '(("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
 			 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
+
+;; set $PATH
+;(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/Cellar/graphviz/2.40.1/bin:"
+;		       "/Library/TeX/texbin"
+;                       "/usr/local/bin/"))
+
+
+
 (package-initialize)
 
 ;; ignore ring
@@ -47,8 +55,13 @@
 (setq frame-title-format "%b  [%I] %f  GNU/Emacs" ) ;; windows title
 (setq inhibit-splash-screen t) ;; startup interface
 
-(use-package dracula-theme
-  :init (load-theme 'dracula t)
+;; Theme
+;(use-package dracula-theme)
+;  :init (load-theme 'dracula t)
+;  :ensure t)
+
+(use-package zenburn-theme
+  :init (load-theme 'zenburn t)
   :ensure t)
 
 ;; org UI
@@ -96,9 +109,13 @@ charset
     (global-auto-complete-mode t)
     ))
 
+;; 使用 ag
+; (add-to-list 'exec-path "/usr/local/bin/")
+
 ;; shortcut
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-;") 'switch-to-next-buffer)
       
 ;------------------------------------------------------
 (custom-set-variables

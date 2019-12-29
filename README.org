@@ -1,0 +1,4 @@
+* How to use this emacs config
+1. git clone this repo
+2. install all the fonts in the fonts/ by double click
+333. open emacs at your compute, enjoy

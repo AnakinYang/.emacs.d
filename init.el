@@ -109,14 +109,41 @@ charset
     (global-auto-complete-mode t)
     ))
 
-;; 使用 ag
+(use-package org-re-reveal
+  :ensure t
+  :init
+  (setq org-re-reveal-root "https://cdn.bootcss.com/reveal.js/3.8.0")
+  :config
+ (setq org-re-reveal-theme "Sky")
+  ; Black/White/League/Sky/Beige/Simple/Serif/Blood/Night/Moon/Solarized
+  (setq org-re-reveal-width 1200)
+  (setq org-re-reveal-height 1000)
+  (setq org-re-reveal-margin "0.1")
+  (setq org-re-reveal-min-scale "0.5")
+  (setq org-re-reveal-max-scale "2.5")
+  (setq org-re-reveal-transition "cube")
+  (setq org-re-reveal-plugins '(classList markdown zoom notes))
+  (setq org-re-reveal-control t)
+  (setq org-re-reveal-center t)
+  (setq org-re-reveal-progress t)
+  (setq org-re-reveal-history nil))
+
+;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
+
 
 ;; shortcut
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-;") 'switch-to-next-buffer)
-      
+
+;; set path, from echo $PATH within OS shell
+(setenv "PATH"
+        (concat
+         (getenv "PATH")
+         ":""/Library/TeX/texbin"
+         ":""/opt/local/sbin"))
+
 ;------------------------------------------------------
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -125,7 +152,7 @@ charset
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (doom-modeline yasnippet-snippets yasnippet magit use-package))))
+    (org-re-reveal doom-modeline yasnippet-snippets yasnippet magit use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -9,8 +9,6 @@
 ;		       "/Library/TeX/texbin"
 ;                       "/usr/local/bin/"))
 
-
-
 (package-initialize)
 
 ;; ignore ring

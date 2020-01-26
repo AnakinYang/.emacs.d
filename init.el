@@ -81,8 +81,8 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
 (set-fontset-font (frame-parameter nil 'font)
 charset
-(font-spec :family "WenQuanYi Micro Hei Mono" :size 18)))
-
+(font-spec :family "WenQuanYi Micro Hei Mono" :size 11)))
+;; For Table ,Font size: CN-18, EN-11
 
 ;; packages
 (use-package magit

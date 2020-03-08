@@ -1,0 +1,14 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("plantuml.com"
+  [url-cookie "active_template::173770" "pub_site.1583646311" "Tue, 10 Mar 2020 05:45:11 UTC" "/" "plantuml.com" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

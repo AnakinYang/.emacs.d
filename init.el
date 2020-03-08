@@ -77,12 +77,12 @@
 (setq org-confirm-babel-evaluate nil)
 
 ;; font
-(set-default-font "Dejavu Sans Mono 11")
+(set-default-font "Dejavu Sans Mono 15")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
 (set-fontset-font (frame-parameter nil 'font)
 charset
-(font-spec :family "WenQuanYi Micro Hei Mono" :size 11)))
-;; For Table ,Font size: CN-18, EN-11
+(font-spec :family "WenQuanYi Micro Hei Mono" :size 18)))
+;; For Table ,Font size: CN-18, EN-11. At mac, CN-18, EN-15
 
 ;; packages
 (use-package magit
@@ -128,7 +128,6 @@ charset
 
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
-
 
 ;; shortcut
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)

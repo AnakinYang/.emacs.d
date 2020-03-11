@@ -1,4 +1,10 @@
-((("plist-get" .
+((("Python" .
+   [1 0 0 0 0 0])
+  ("concat" .
+   [0 0 0 0 0 1])
+  ("python-shell-interpreter" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("plist-get" .
    [0 0 0 0 0 0 0 0 1])
   ("python-menu" .
    [0 0 1 0 0 0 0 0 0 0 0])

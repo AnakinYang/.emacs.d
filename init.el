@@ -141,6 +141,8 @@ charset
          ":""/Library/TeX/texbin"
          ":""/opt/local/sbin"))
 
+;; For Python
+(setq python-shell-interpreter "/usr/local/bin/python3")
 ;------------------------------------------------------
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

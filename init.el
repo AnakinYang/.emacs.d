@@ -3,12 +3,6 @@
 (setq package-archives '(("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
 			 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
-
-;; set $PATH
-;(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/Cellar/graphviz/2.40.1/bin:"
-;		       "/Library/TeX/texbin"
-;                       "/usr/local/bin/"))
-
 (package-initialize)
 
 ;; ignore ring
@@ -107,25 +101,6 @@ charset
     (global-auto-complete-mode t)
     ))
 
-(use-package org-re-reveal
-  :ensure t
-  :init
-  (setq org-re-reveal-root "https://cdn.bootcss.com/reveal.js/3.8.0")
-  :config
- (setq org-re-reveal-theme "Sky")
-  ; Black/White/League/Sky/Beige/Simple/Serif/Blood/Night/Moon/Solarized
-  (setq org-re-reveal-width 1200)
-  (setq org-re-reveal-height 1000)
-  (setq org-re-reveal-margin "0.1")
-  (setq org-re-reveal-min-scale "0.5")
-  (setq org-re-reveal-max-scale "2.5")
-  (setq org-re-reveal-transition "cube")
-  (setq org-re-reveal-plugins '(classList markdown zoom notes))
-  (setq org-re-reveal-control t)
-  (setq org-re-reveal-center t)
-  (setq org-re-reveal-progress t)
-  (setq org-re-reveal-history nil))
-
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
 
@@ -139,7 +114,8 @@ charset
         (concat
          (getenv "PATH")
          ":""/Library/TeX/texbin"
-         ":""/opt/local/sbin"))
+         ":""/opt/local/sbin"
+         ":""/usr/local/bin"))
 
 ;; For Python
 (setq python-shell-interpreter "/usr/local/bin/python3")
@@ -151,7 +127,7 @@ charset
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-re-reveal doom-modeline yasnippet-snippets yasnippet magit use-package))))
+    (doom-modeline yasnippet-snippets yasnippet magit use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

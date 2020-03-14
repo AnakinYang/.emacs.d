@@ -47,10 +47,6 @@
 (setq frame-title-format "%b  [%I] %f  GNU/Emacs" ) ;; windows title
 (setq inhibit-splash-screen t) ;; startup interface
 
-;; Theme
-;(use-package dracula-theme)
-;  :init (load-theme 'dracula t)
-;  :ensure t)
 
 (use-package zenburn-theme
   :init (load-theme 'zenburn t)
@@ -90,16 +86,42 @@ charset
   (use-package yasnippet-snippets :ensure t)
   )
 
+;; PlantUML
 (setq org-plantuml-jar-path
       (expand-file-name "~/.emacs.d/plantuml.jar"))
 
-(use-package auto-complete
+;; Company mode
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq python-shell-interpreter "/usr/local/bin/python3")
+(setq-default tab-width 4)
+(setq jedi:environment-root "jedi")
+
+;; For Python
+
+(use-package company-jedi             ;;; company-mode completion back-end for Python JEDI
+  :config
+  (setq jedi:environment-virtualenv (list (expand-file-name "~/.emacs.d/.python-environments/")))
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+  (setq jedi:use-shortcuts t)
+  (setq jedi:get-in-function-call-delay 0)
+  (setq compandy-minimum-prefix-length 3)
+  (setq company-tooltip-align-annotations t)
+  (setq company-selection-wrap-around t)
+  (defun config/enable-company-jedi ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'config/enable-company-jedi))
+
+
+(use-package elpy
   :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+  :commands elpy-enable
+  :hook
+  (python-mode . elpy-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
@@ -109,17 +131,15 @@ charset
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-;") 'switch-to-next-buffer)
 
-;; set path, from echo $PATH within OS shell
-(setenv "PATH"
-        (concat
-         (getenv "PATH")
-         ":""/Library/TeX/texbin"
-         ":""/opt/local/sbin"
-         ":""/usr/local/bin"))
+;; set path
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
-;; For Python
-(setq python-shell-interpreter "/usr/local/bin/python3")
-;------------------------------------------------------
+
+;;--------------------------------------------------------
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -127,7 +147,7 @@ charset
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (doom-modeline yasnippet-snippets yasnippet magit use-package))))
+    (company-shell company-jedi elpy zenburn-theme yasnippet-snippets use-package magit auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

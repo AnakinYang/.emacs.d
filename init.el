@@ -3,12 +3,6 @@
 (setq package-archives '(("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
 			 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
-
-;; set $PATH
-;(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/Cellar/graphviz/2.40.1/bin:"
-;		       "/Library/TeX/texbin"
-;                       "/usr/local/bin/"))
-
 (package-initialize)
 
 ;; ignore ring
@@ -53,10 +47,6 @@
 (setq frame-title-format "%b  [%I] %f  GNU/Emacs" ) ;; windows title
 (setq inhibit-splash-screen t) ;; startup interface
 
-;; Theme
-;(use-package dracula-theme)
-;  :init (load-theme 'dracula t)
-;  :ensure t)
 
 (use-package zenburn-theme
   :init (load-theme 'zenburn t)
@@ -96,35 +86,11 @@ charset
   (use-package yasnippet-snippets :ensure t)
   )
 
+;; PlantUML
 (setq org-plantuml-jar-path
       (expand-file-name "~/.emacs.d/plantuml.jar"))
 
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
-
-(use-package org-re-reveal
-  :ensure t
-  :init
-  (setq org-re-reveal-root "https://cdn.bootcss.com/reveal.js/3.8.0")
-  :config
- (setq org-re-reveal-theme "Sky")
-  ; Black/White/League/Sky/Beige/Simple/Serif/Blood/Night/Moon/Solarized
-  (setq org-re-reveal-width 1200)
-  (setq org-re-reveal-height 1000)
-  (setq org-re-reveal-margin "0.1")
-  (setq org-re-reveal-min-scale "0.5")
-  (setq org-re-reveal-max-scale "2.5")
-  (setq org-re-reveal-transition "cube")
-  (setq org-re-reveal-plugins '(classList markdown zoom notes))
-  (setq org-re-reveal-control t)
-  (setq org-re-reveal-center t)
-  (setq org-re-reveal-progress t)
-  (setq org-re-reveal-history nil))
+(setq python-shell-interpreter "/usr/local/bin/python3")
 
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
@@ -134,27 +100,11 @@ charset
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-;") 'switch-to-next-buffer)
 
-;; set path, from echo $PATH within OS shell
-(setenv "PATH"
-        (concat
-         (getenv "PATH")
-         ":""/Library/TeX/texbin"
-         ":""/opt/local/sbin"))
+;; set path
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
-;; For Python
-(setq python-shell-interpreter "/usr/local/bin/python3")
-;------------------------------------------------------
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (org-re-reveal doom-modeline yasnippet-snippets yasnippet magit use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+;;--------------------------------------------------------

@@ -1,2 +1,3 @@
 git status
 git config --list
+ssh root@121.37.134.139

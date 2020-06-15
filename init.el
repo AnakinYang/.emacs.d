@@ -92,6 +92,41 @@ charset
 
 (setq python-shell-interpreter "/usr/local/bin/python3")
 
+
+
+(use-package org-roam
+      :hook
+      (after-init . org-roam-mode)
+      :custom
+      (org-roam-directory "~/org/")
+      (org-roam-graph-executable "/usr/local/bin/dot")
+      (org-roam-graph-viewer "/usr/local/bin/inkscape")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n j" . org-roam-jump-to-index)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
+
+;; ivy
+(use-package ivy
+  :ensure t
+  :diminish ivy-mode
+  :hook (after-init . ivy-mode))
+
+;; org-download
+(use-package org-download
+  :after org
+  :bind
+  (:map org-mode-map
+        (("s-y" . org-download-screenshot)
+         ("s-Y" . org-download-yank)))
+  :custom
+  (org-download-image-dir "~/org/static/")
+)
+
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
 
@@ -99,6 +134,7 @@ charset
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-;") 'switch-to-next-buffer)
+(global-set-key (kbd "C-:") 'switch-to-prev-buffer)
 
 ;; set path
 (use-package exec-path-from-shell
@@ -108,3 +144,18 @@ charset
 
 
 ;;--------------------------------------------------------
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-download-screenshot-method "screencapture -i %s")
+ '(package-selected-packages
+   (quote
+    (org-download ivy org-roam zenburn-theme yasnippet-snippets use-package magit flycheck exec-path-from-shell elpy company-shell company-lsp company-jedi auto-complete))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

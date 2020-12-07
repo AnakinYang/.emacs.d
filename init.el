@@ -71,6 +71,8 @@
  '(
    (python . t)
    (plantuml . t)
+   (java . t)
+   (js . t)
    ))
 
 ;; shutdown evaluate notice
@@ -81,8 +83,8 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
 (set-fontset-font (frame-parameter nil 'font)
 charset
-(font-spec :family "WenQuanYi Micro Hei Mono" :size 18)))
-
+(font-spec :family "Coca-Cola Care Font KaiTi" :size 16)))
+;(font-spec :family "WenQuanYi Micro Hei Mono" :size 18)))；； Dejavu 11
 
 ;; packages
 (use-package magit
@@ -112,23 +114,67 @@ charset
   :init
   (setq org-re-reveal-root "https://cdn.bootcss.com/reveal.js/3.8.0")
   :config
- (setq org-re-reveal-theme "Sky")
+ (setq org-re-reveal-theme "Night")
   ; Black/White/League/Sky/Beige/Simple/Serif/Blood/Night/Moon/Solarized
   (setq org-re-reveal-width 1200)
   (setq org-re-reveal-height 1000)
   (setq org-re-reveal-margin "0.1")
   (setq org-re-reveal-min-scale "0.5")
   (setq org-re-reveal-max-scale "2.5")
-  (setq org-re-reveal-transition "cube")
+  (setq org-re-reveal-transition "page")
   (setq org-re-reveal-plugins '(classList markdown zoom notes))
   (setq org-re-reveal-control t)
   (setq org-re-reveal-center t)
   (setq org-re-reveal-progress t)
   (setq org-re-reveal-history nil))
 
+;; ivy
+(use-package ivy
+  :ensure t
+  :diminish ivy-mode
+  :hook (after-init . ivy-mode))
+
+;; Org-roam
+(use-package org-roam
+      :hook
+      (after-init . org-roam-mode)
+      :custom
+      (org-roam-directory "D:\Personal\Org")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n j" . org-roam-jump-to-index)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
+
+(use-package org-download
+  :after org
+  :bind
+  (:map org-mode-map
+        (("s-y" . org-download-screenshot)
+         ("s-Y" . org-download-yank)))
+  :custom
+  (org-download-image-dir "D:\Personal\Org\img")
+  )
+
+
 ;; Use ag
 ; (add-to-list 'exec-path "/usr/local/bin/")
 
+
+;; org agenda
+(setq org-todo-keywords
+      '((sequence "未开始(p!)" "进行中(t!)" "阻塞中(s!)" "|" "已完成(d!)" "已取消(a@/!)")))
+
+(setq org-todo-keyword-faces
+   '(("未开始" .   (:foreground "red" :weight bold))
+    ("阻塞中" .   (:foreground "red" :weight bold))
+    ("进行中" .      (:foreground "orange" :weight bold))
+    ("已完成" .      (:foreground "green" :weight bold))
+    ("已取消" .     (:background "gray" :foreground "black"))
+))
 
 ;; shortcut
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
@@ -148,9 +194,11 @@ charset
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files nil)
+ '(org-download-screenshot-method "convert clipboard: %s")
  '(package-selected-packages
    (quote
-    (org-re-reveal doom-modeline yasnippet-snippets yasnippet magit use-package))))
+    (org-download emacsql-sqlite3 ivy org-noter org-re-reveal doom-modeline yasnippet-snippets yasnippet magit use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: p
+# key: p
+# --
+#+OPTIONS: num:nil
+#+REVEAL_TRANS: linear
+#+REVEAL_THEME: black
+#+Title: 学习方法分享
+#+Author: 杨袁庆
